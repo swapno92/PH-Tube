@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .font-style {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .line{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body class="container mx-auto ">
+
+    <!-- emptyPage -->
+    <section class="flex flex-col items-center  mt-40">
+        <div><img src="./images/Icon.png" alt=""></div>
+        <h1 class="text-3xl font-bold text-center">Oops!! Sorry, There is no <br> content here</h1>
+    </section>
+
+    <!-- answer to the question section -->
+    <section class=" space-y-3 p-3 bg-teal-500">
+        <div class="bg-slate-200 rounded-xl px-3 py-5 space-y-2">
+            <h2 class="font-medium">1.Discuss the scope of var, let, and const...</h2>
+            <p class="font-bold under">Answer:</p>
+            <div class="grid md:grid-cols-3 grid-cols-1  gap-3">
+                <div class="border-2 border-sky-500 bg-white rounded-lg">
+                    <div class="text-center font-bold text-xl under mb-2">var</div>
+                    <ul class="text-base p-3 list-disc list-inside">
+                        <li>The scope of a var variable is functional scope.</li>
+                        <li>It can be updated and re-declared into the scope.</li>
+                        <li>It can be declared without initialization.</li>
+                    </ul>
+                </div>
+                <div class="border-2 border-sky-500 bg-white  rounded-lg">
+                    <div class="text-center font-bold text-xl under mb-2">let</div>
+                    <ul class="text-base p-3 list-disc list-inside">
+                        <li>The scope of a let variable is block scope.</li>
+                        <li>It can be updated but cannot be re-declared into the scope.</li>
+                        <li>It can be declared without initialization.</li>
+                    </ul>
+                </div>
+                <div class="border-2 border-sky-500 bg-white  rounded-lg">
+                    <div class="text-center font-bold text-xl under mb-2">const</div>
+                    <ul class="text-base p-3 list-disc list-inside">
+                        <li>The scope of a const variable is block scope.</li>
+                        <li>It cannot be updated or re-declared into the scope.</li>
+                        <li>It cannot be declared without initialization.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <div class="bg-slate-200 rounded-xl px-3 py-5 space-y-2">
+            <h2 class="font-medium">2. Tell us the use cases of null and undefined...</h2>
+            <p class="font-bold under">Answer:</p>
+            <div class="grid md:grid-cols-2 grid-cols-1 gap-3 md:px-20">
+
+                <div class="border-2 border-sky-500 bg-white  rounded-lg">
+                    <div class="text-center font-bold text-xl under mb-2">Undefined</div>
+                    <ul class="text-base p-3 list-disc list-inside ">
+                        <li>Undefined means the variable has been declared, but its value has not been assigned.</li>
+                        <li>The typeof() operator returns undefined for an undefined variable.</li>
+                        <li>It returns NaN on performing arithmetic operations.</li>
+                    </ul>
+                </div>
+                <div class="border-2 border-sky-500 bg-white  rounded-lg">
+                    <div class="text-center font-bold text-xl under mb-2">null</div>
+                    <ul class="text-base p-3 list-disc list-inside">
+                        <li>Null means an empty value or a blank value.</li>
+                        <li>The typeof() operator returns the type as an object for a variable whose value is assigned
+                            as null.</li>
+                        <li>converts to 0 then perform the operation.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="bg-slate-200 rounded-xl px-3 py-5 space-y-2">
+            <h2 class="font-medium">3. What do you mean by REST API?...</h2>
+            <p class="font-normal"><span class="under font-bold">Answer:</span></p>
+            <div class="md:px-20">
+                <div class="border-2 border-sky-500 bg-white  rounded-lg p-8">
+                    A REST API is an application programming interface (API or web API) that
+                    conforms to the constraints of REST architectural style and allows for interaction with RESTful web
+                    services. REST stands for representational state transfer and was created by computer scientist Roy
+                    Fielding.
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>
