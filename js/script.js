@@ -30,7 +30,7 @@ function displayCards(cards) {
 
     if (cards.length === 0) {
         const emptyCard = document.getElementById('empty-container')
-        ami.innerHTML = ''
+        emptyCard.innerHTML = ''
         // emptyPage
         const div = document.createElement('div');
         div.classList = `mt-20 h-16`
