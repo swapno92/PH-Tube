@@ -19,6 +19,8 @@ function displayCategories(categories) {
     });
 }
 
+
+
 const showCategoryCard = async (id) => {
     const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${id}`);
     const data = await res.json();
@@ -47,13 +49,13 @@ function displayCards(cards) {
             const hours = Math.floor(seconds / 3600);
             const excludingHoursNewSeconds = seconds % 3600;
             const minutes = Math.floor(excludingHoursNewSeconds / 60);
-            const showtime = (hours + ' ' + 'hrs' + minutes + ' ' + 'min');
+            const showtime = (hours + ' ' + 'hrs ' + minutes + ' ' + 'min ago');
 
             const div = document.createElement('div');
             cardContainer.classList = `grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 md:px-3 px-8`
             div.innerHTML = `
             <img src="${card.thumbnail}" alt="" class="rounded-lg h-44 w-full">
-            <div class='show-time absolute -mt-8 lg:ml-36 ml-52 bg-[rgba(23,23,23)] px-1 text-white'></div>
+            <div class='show-time w-[170px] text-center text-sm absolute -mt-8 lg:ml-28 ml-44 bg-[rgba(23,23,23)] px-1 text-white'></div>
                 <div class="mt-4 flex gap-3 space-y-2">
                     <div><img src="${card.authors[0].profile_picture}" alt="" class="rounded-full w-12 h-12 "></div>
                     <div class=" space-y-1">
@@ -64,6 +66,39 @@ function displayCards(cards) {
                 </div>
             `
             cardContainer.appendChild(div)
+
+            document.querySelector('#sort-date-btn').addEventListener('click', () => {
+                cardContainer.textContent = ''
+
+                const sortedData = cards.sort(
+                    (a, b) =>
+                        Number(b.others.views.slice(0, -1)) -
+                        Number(a.others.views.slice(0, -1))
+                );
+                sortedData.forEach((card) => {
+                    const seconds = `${card.others.posted_date}`
+                    const hours = Math.floor(seconds / 3600);
+                    const excludingHoursNewSeconds = seconds % 3600;
+                    const minutes = Math.floor(excludingHoursNewSeconds / 60);
+                    const showtime = (hours + ' ' + 'hrs ' + minutes + ' ' + 'min ago');
+
+                    const div = document.createElement('div');
+                    cardContainer.classList = `grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 md:px-3 px-8`
+                    div.innerHTML = `
+                    <img src="${card.thumbnail}" alt="" class="rounded-lg h-44 w-full">
+                    <div class='show-time w-[170px] text-center text-sm absolute -mt-8 lg:ml-28 ml-44 bg-[rgba(23,23,23)] px-1 text-white'></div>
+                        <div class="mt-4 flex gap-3 space-y-2">
+                            <div><img src="${card.authors[0].profile_picture}" alt="" class="rounded-full w-12 h-12 "></div>
+                            <div class=" space-y-1">
+                                <h2 class="text-base font-bold">${card.title}</h2>
+                                <p class="text-sm font-normal text-[rgba(23,23,23,.70)]">${card.authors[0].profile_name}<span> ${card?.authors[0]?.verified === true ? `<i class="fa fa-solid fa-circle-check" style="color: #1565ef;"></i>` : ''}</span></p>
+                                <p class="text-sm font-normal text-[rgba(23,23,23,.70)]"><span>${card.others.views}</span> views</p>
+                            </div>
+                        </div>
+                    `
+                    cardContainer.appendChild(div)
+                });
+            });
 
             const showTiming = div.querySelector('.show-time')
             if (card.others.posted_date) {
@@ -81,3 +116,4 @@ function displayCards(cards) {
 
 showCategoryCard(1000)
 loadCategories()
+
