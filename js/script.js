@@ -19,8 +19,6 @@ function displayCategories(categories) {
     });
 }
 
-
-
 const showCategoryCard = async (id) => {
     const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${id}`);
     const data = await res.json();
@@ -55,7 +53,7 @@ function displayCards(cards) {
             cardContainer.classList = `grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 md:px-3 px-8`
             div.innerHTML = `
             <img src="${card.thumbnail}" alt="" class="rounded-lg h-44 w-full">
-            <div class='show-time w-[170px] text-center text-sm absolute -mt-8 lg:ml-28 ml-44 bg-[rgba(23,23,23)] px-1 text-white'></div>
+            <div class='show-time ${card.others.posted_date ? 'block' : 'hidden'} w-[170px] text-center text-sm absolute -mt-8 lg:ml-28 ml-44 bg-[rgba(23,23,23)] px-1 text-white'>${card.others.posted_date ? showtime : ''}</div>
                 <div class="mt-4 flex gap-3 space-y-2">
                     <div><img src="${card.authors[0].profile_picture}" alt="" class="rounded-full w-12 h-12 "></div>
                     <div class=" space-y-1">
@@ -86,7 +84,7 @@ function displayCards(cards) {
                     cardContainer.classList = `grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 md:px-3 px-8`
                     div.innerHTML = `
                     <img src="${card.thumbnail}" alt="" class="rounded-lg h-44 w-full">
-                    <div class='show-time w-[170px] text-center text-sm absolute -mt-8 lg:ml-28 ml-44 bg-[rgba(23,23,23)] px-1 text-white'></div>
+                    <div class='show-time ${card.others.posted_date ? 'block' : 'hidden'} w-[170px] text-center text-sm absolute -mt-8 lg:ml-28 ml-44 bg-[rgba(23,23,23)] px-1 text-white'>${card.others.posted_date ? showtime : ''}</div>
                         <div class="mt-4 flex gap-3 space-y-2">
                             <div><img src="${card.authors[0].profile_picture}" alt="" class="rounded-full w-12 h-12 "></div>
                             <div class=" space-y-1">
@@ -100,15 +98,6 @@ function displayCards(cards) {
                 });
             });
 
-            const showTiming = div.querySelector('.show-time')
-            if (card.others.posted_date) {
-                showTiming.textContent = showtime;
-            }
-            else {
-                showTiming.textContent = ''
-            }
-
-
         });
     }
 }
@@ -116,4 +105,3 @@ function displayCards(cards) {
 
 showCategoryCard(1000)
 loadCategories()
-
