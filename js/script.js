@@ -27,31 +27,33 @@ const showCategoryCard = async (id) => {
 }
 
 function displayCards(cards) {
-    const cardContainer = document.getElementById('card-container')
-    cardContainer.textContent = ''
 
     if (cards.length === 0) {
+        const emptyCard = document.getElementById('empty-container')
+        ami.innerHTML = ''
         // emptyPage
         const div = document.createElement('div');
-        cardContainer.classList = ` grid-cols-1`
-        div.classList = `mt-20 `
+        div.classList = `mt-20 h-16`
         div.innerHTML = `
         <div class="flex  justify-center items-center"><img src="./images/Icon.png" alt=""></div>
         <h1 class="text-3xl font-bold text-center">Oops!! Sorry, There is no <br> content here</h1>
             `;
-        cardContainer.appendChild(div)
-    }
-    else {
-        cards.forEach(card => {
-            const seconds = `${card.others.posted_date}`
-            const hours = Math.floor(seconds / 3600);
-            const excludingHoursNewSeconds = seconds % 3600;
-            const minutes = Math.floor(excludingHoursNewSeconds / 60);
-            const showtime = (hours + ' ' + 'hrs ' + minutes + ' ' + 'min ago');
+        emptyCard.appendChild(div)
 
-            const div = document.createElement('div');
-            cardContainer.classList = `grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 md:px-3 px-8`
-            div.innerHTML = `
+    }
+
+    const cardContainer = document.getElementById('card-container')
+    cardContainer.innerHTML = ''
+    cards.forEach(card => {
+        const seconds = `${card.others.posted_date}`
+        const hours = Math.floor(seconds / 3600);
+        const excludingHoursNewSeconds = seconds % 3600;
+        const minutes = Math.floor(excludingHoursNewSeconds / 60);
+        const showtime = (hours + ' ' + 'hrs ' + minutes + ' ' + 'min ago');
+
+        const div = document.createElement('div');
+        cardContainer.classList = `grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 md:px-3 px-8`
+        div.innerHTML = `
             <img src="${card.thumbnail}" alt="" class="rounded-lg h-44 w-full">
             <div class='show-time ${card.others.posted_date ? 'block' : 'hidden'} w-[170px] text-center text-sm absolute -mt-8 lg:ml-28 ml-44 bg-[rgba(23,23,23)] px-1 text-white'>${card.others.posted_date ? showtime : ''}</div>
                 <div class="mt-4 flex gap-3 space-y-2">
@@ -63,26 +65,28 @@ function displayCards(cards) {
                     </div>
                 </div>
             `
-            cardContainer.appendChild(div)
+        cardContainer.appendChild(div)
+    });
 
-            document.querySelector('#sort-date-btn').addEventListener('click', () => {
-                cardContainer.textContent = ''
+    document.querySelector('#sort-date-btn').addEventListener('click', () => {
 
-                const sortedData = cards.sort(
-                    (a, b) =>
-                        Number(b.others.views.slice(0, -1)) -
-                        Number(a.others.views.slice(0, -1))
-                );
-                sortedData.forEach((card) => {
-                    const seconds = `${card.others.posted_date}`
-                    const hours = Math.floor(seconds / 3600);
-                    const excludingHoursNewSeconds = seconds % 3600;
-                    const minutes = Math.floor(excludingHoursNewSeconds / 60);
-                    const showtime = (hours + ' ' + 'hrs ' + minutes + ' ' + 'min ago');
+        const sortedData = cards.sort(
+            (a, b) =>
+                Number(b.others.views.slice(0, -1)) -
+                Number(a.others.views.slice(0, -1))
+        );
+        cardContainer.textContent = ''
 
-                    const div = document.createElement('div');
-                    cardContainer.classList = `grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 md:px-3 px-8`
-                    div.innerHTML = `
+        sortedData.forEach((card) => {
+            const seconds = `${card.others.posted_date}`
+            const hours = Math.floor(seconds / 3600);
+            const excludingHoursNewSeconds = seconds % 3600;
+            const minutes = Math.floor(excludingHoursNewSeconds / 60);
+            const showtime = (hours + ' ' + 'hrs ' + minutes + ' ' + 'min ago');
+
+            const div = document.createElement('div');
+            cardContainer.classList = `grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 md:px-3 px-8`
+            div.innerHTML = `
                     <img src="${card.thumbnail}" alt="" class="rounded-lg h-44 w-full">
                     <div class='show-time ${card.others.posted_date ? 'block' : 'hidden'} w-[170px] text-center text-sm absolute -mt-8 lg:ml-28 ml-44 bg-[rgba(23,23,23)] px-1 text-white'>${card.others.posted_date ? showtime : ''}</div>
                         <div class="mt-4 flex gap-3 space-y-2">
@@ -94,12 +98,9 @@ function displayCards(cards) {
                             </div>
                         </div>
                     `
-                    cardContainer.appendChild(div)
-                });
-            });
-
+            cardContainer.appendChild(div)
         });
-    }
+    });
 }
 
 
