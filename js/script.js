@@ -27,10 +27,12 @@ const showCategoryCard = async (id) => {
 }
 
 function displayCards(cards) {
+    const emptyCard = document.getElementById('empty-container')
+    emptyCard.innerHTML = ''
 
     if (cards.length === 0) {
-        const emptyCard = document.getElementById('empty-container')
-        emptyCard.innerHTML = ''
+        // const emptyCard = document.getElementById('empty-container')
+        // emptyCard.innerHTML = ''
         // emptyPage
         const div = document.createElement('div');
         div.classList = `mt-20 h-16`
